@@ -1,0 +1,26 @@
+{
+  "name": "orga.xyz",
+  "version": "1.0.0",
+  "description": "Planning application",
+  "main": "server.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "express": "^4.12.4",
+    "node-jsx": "^0.13.3",
+    "node-libs-browser": "^0.5.2",
+    "react": "^0.13.3"
+  },
+  "devDependencies": {
+    "expect": "^1.6.0",
+    "mocha": "^2.2.5",
+    "webpack": "^1.9.10"
+  },
+  "scripts": {
+    "test": "mocha",
+    "start": "node server.js"
+  },
+  "author": "Nicolas Chambrier <naholyr@gmail.com>",
+  "license": "ISC"
+}
