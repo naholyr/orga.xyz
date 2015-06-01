@@ -1,25 +1,39 @@
 {
-  "name": "orga.xyz",
+  "name": "atelier-react",
   "version": "1.0.0",
-  "description": "Planning application",
-  "main": "server.js",
-  "directories": {
-    "test": "test"
-  },
+  "description": "",
+  "main": "index.js",
   "dependencies": {
+    "babel": "^5.4.7",
+    "baobab": "^1.1.0",
+    "baobab-react": "^0.1.1",
     "express": "^4.12.4",
-    "node-jsx": "^0.13.3",
-    "node-libs-browser": "^0.5.2",
-    "react": "^0.13.3"
+    "react": "^0.13.3",
+    "react-router": "^0.13.3"
   },
   "devDependencies": {
-    "expect": "^1.6.0",
-    "mocha": "^2.2.5",
-    "webpack": "^1.9.10"
+    "aggregate-commands": "^2.0.1",
+    "babelify": "^6.1.2",
+    "browserify": "^10.2.3",
+    "json-server": "^0.7.11",
+    "supervisor": "^0.6.0",
+    "watchify": "^3.2.1"
   },
   "scripts": {
-    "test": "mocha",
-    "start": "node server.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server",
+    "prestart": "npm run build",
+    "build:js": "browserify -t babelify public/main.js -dv > public/build.js",
+    "build": "npm run build:js",
+    "watch:js": "watchify -t babelify public/main.js -o public/build.js -dv",
+    "watch:server": "supervisor -i public -e js server.js",
+    "watch": "aggregate-commands watch"
+  },
+  "aggregate-commands": {
+    "watch": [
+      [ "js",      "npm", "run", "watch:js" ],
+      [ "server",  "npm", "run", "watch:server" ]
+    ]
   },
   "author": "Nicolas Chambrier <naholyr@gmail.com>",
   "license": "ISC"
