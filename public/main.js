@@ -1,17 +1,9 @@
 "use strict"
 
 import React from "react"
-import App from "./components/app"
-import Flux from "./flux"
-import FluxComponent from "flummox/component"
-import data from "../data.json"
+import initComponent from "./init-component"
+import backend from "./backend"
 
-const flux = new Flux()
+const mount = document.getElementById("main")
 
-flux.getStore("poll").setState(data)
-
-React.render(
-  <FluxComponent flux={ flux } connectToStores={ ['poll'] }>
-    <App />
-  </FluxComponent>
-, document.getElementById("main"))
+initComponent(backend).then(component => React.render(component, mount))

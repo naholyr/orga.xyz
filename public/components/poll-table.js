@@ -44,9 +44,6 @@ export default class PollTable extends React.Component {
   }
 
   render() {
-    const controlledScrolling = this.props.left !== undefined || this.props.top !== undefined
-    const hours = this.props.hours
-
     return (
       <table>
         <thead>

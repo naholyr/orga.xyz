@@ -1,7 +1,6 @@
 "use strict"
 
 import {Store} from "flummox"
-import without from "lodash/array/without"
 import find from "lodash/collection/find"
 
 
@@ -10,10 +9,11 @@ export default class PollStore extends Store {
   constructor(flux) {
     super();
 
-    const pollActions = flux.getActions('poll')
-    this.register(pollActions.select, this.onSelect)
-    this.register(pollActions.unselect, this.onUnselect)
+    const pollActions = flux.getActions("poll")
+    this.register(pollActions.select, this.onUpdateSelections)
+    this.register(pollActions.unselect, this.onUpdateSelections)
     this.register(pollActions.updateWho, this.onUpdateWho)
+    this.register(pollActions.load, this.onLoad)
   }
 
   findSelection(selection) {
@@ -23,19 +23,9 @@ export default class PollStore extends Store {
     })
   }
 
-  onSelect(selection) {
-    const found = this.findSelection(selection)
-
+  onUpdateSelections(selections) {
     this.setState({
-      "selections": without(this.state.selections, found).concat(selection)
-    })
-  }
-
-  onUnselect(selection) {
-    const found = this.findSelection(selection)
-
-    this.setState({
-      "selections": without(this.state.selections, found)
+      "selections": selections
     })
   }
 
@@ -43,5 +33,9 @@ export default class PollStore extends Store {
     this.setState({
       "who": who
     })
+  }
+
+  onLoad(data) {
+    this.setState(data)
   }
 }
