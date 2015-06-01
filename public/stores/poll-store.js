@@ -34,8 +34,6 @@ export default class PollStore extends Store {
         { workshop: "peche-ligne", hour: "10-11", who: "John Doe" }
       ]
     }
-
-    console.log("initialized store")
   }
 
   findSelection(selection) {

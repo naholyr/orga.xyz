@@ -11,7 +11,5 @@ export default class Flux extends Flummox {
 
     this.createActions("poll", PollActions)
     this.createStore("poll", PollStore, this)
-
-    console.log("init flux")
   }
 }
