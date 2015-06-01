@@ -14,26 +14,6 @@ export default class PollStore extends Store {
     this.register(pollActions.select, this.onSelect)
     this.register(pollActions.unselect, this.onUnselect)
     this.register(pollActions.updateWho, this.onUpdateWho)
-
-    this.state = {
-      "who": "John Doe",
-      "workshops": {
-        "foot": "Football",
-        "maquillage": "Maquillage",
-        "peche-ligne": "Pêche à la ligne"
-      },
-      "hours": [
-        "10-11",
-        "11-12",
-        "14-15",
-        "15-16"
-      ],
-      "selections": [
-        { workshop: "foot", hour: "10-11", who: "Bob Morane" },
-        { workshop: "foot", hour: "11-12", who: "John Doe" },
-        { workshop: "peche-ligne", hour: "10-11", who: "John Doe" }
-      ]
-    }
   }
 
   findSelection(selection) {
