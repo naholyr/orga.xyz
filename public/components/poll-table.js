@@ -3,6 +3,7 @@
 import React from "react"
 import PollSwitch from "./poll-switch"
 import {branch} from "baobab-react/higher-order"
+import {merge} from "lodash/object"
 
 
 export default class PollTable extends React.Component {
@@ -72,21 +73,21 @@ export default class PollTable extends React.Component {
     const workshop = this.getWorkshopIndex(rowIndex)
     const key = workshop + "/" + hour
 
-    this.state.selects[key] = selected ? who : null
+    this.setState({ selects: merge(this.state.selects, { [key]: selected ? who : null }) })
   }
 
   renderCell(rowIndex, hourIndex) {
     const hour = this.state.hours[hourIndex]
     const workshop = this.getWorkshopIndex(rowIndex)
     const key = workshop + "/" + hour
-    const person = this.state.selects[key] || this.props.who
+    const affected = this.state.selects[key] || null
 
     return (
-      <td key={ key }>
+      <td key={ key } className={ affected && this.props.who === affected ? "highlight" : "" }>
         <PollSwitch
-          selected={ Boolean(person) }
-          who={ person }
-          enabled={ this.props.who && person === this.props.who }
+          selected={ affected !== null }
+          who={ affected || this.props.who }
+          enabled={ !affected || this.props.who === affected }
           onToggle={ (selected, who) => this.onToggle(rowIndex, hourIndex, selected, who) }
         />
       </td>

@@ -21,10 +21,7 @@ export default class App extends Component {
   render () {
     return (
       <div className="poll">
-        <label>
-          Entrez votre nom pour réserver une tranche horaire :
-          <input placeholder="Votre nom" value={ this.state.who } onChange={ (e) => this.setState({ who: e.target.value }) } />
-        </label>
+        <input placeholder="Entrez votre nom" value={ this.state.who } onChange={ (e) => this.setState({ who: e.target.value }) } />
         <PollTable who={ this.state.who } />
         <StatusMessage />
       </div>
