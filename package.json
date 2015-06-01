@@ -16,6 +16,7 @@
     "babelify": "^6.1.2",
     "browserify": "^10.2.3",
     "json-server": "^0.7.11",
+    "stylus": "^0.51.1",
     "supervisor": "^0.6.0",
     "watchify": "^3.2.1"
   },
@@ -23,8 +24,15 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server",
     "prestart": "npm run build",
-    "build:js": "browserify -t babelify public/main.js -dv > public/build.js",
-    "build": "npm run build:js",
+    "build:js": "browserify -t babelify public/main.js -o public/build.js",
+    "build:js:prod": "npm run build:js",
+    "build:js:dev": "npm run build:js -- --debug --verbose",
+    "build:css": "stylus public/styles/main.styl -o public/styles/build.css",
+    "build:css:prod": "npm run build:css -- --compress",
+    "build:css:dev": "npm run build:css -- --sourcemap-inline",
+    "build:dev": "npm run build:js:dev && npm run build:css:dev",
+    "build": "npm run build:js:prod && npm run build:css:prod -- -c",
+    "watch:css": "npm run build:css:dev -- --watch",
     "watch:js": "watchify -t babelify public/main.js -o public/build.js -dv",
     "watch:server": "supervisor -i public -e js server.js",
     "watch": "aggregate-commands watch"
@@ -36,6 +44,12 @@
         "npm",
         "run",
         "watch:js"
+      ],
+      [
+        "css",
+        "npm",
+        "run",
+        "watch:css"
       ],
       [
         "server",

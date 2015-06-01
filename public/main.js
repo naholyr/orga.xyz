@@ -1,13 +1,14 @@
 "use strict"
 
 import React from "react"
+import App from "./components/app"
+
+/*
 import Baobab from "baobab"
 import {root} from "baobab-react/higher-order"
 import initializeTree from "./initialize-tree"
 import {bindEvents} from "./action"
-import App from "./components/app"
 
-/*
 const tree = new Baobab()
 
 console.log(require("util").inspect(tree))
