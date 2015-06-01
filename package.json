@@ -16,6 +16,7 @@
     "babelify": "^6.1.2",
     "browserify": "^10.2.3",
     "json-server": "^0.7.11",
+    "nib": "^1.1.0",
     "stylus": "^0.51.1",
     "supervisor": "^0.6.0",
     "watchify": "^3.2.1"
@@ -27,7 +28,7 @@
     "build:js": "browserify -t babelify public/main.js -o public/build.js",
     "build:js:prod": "npm run build:js",
     "build:js:dev": "npm run build:js -- --debug --verbose",
-    "build:css": "stylus public/styles/main.styl -o public/styles/build.css",
+    "build:css": "stylus public/styles/main.styl -o public/styles/build.css --use nib",
     "build:css:prod": "npm run build:css -- --compress",
     "build:css:dev": "npm run build:css -- --sourcemap-inline",
     "build:dev": "npm run build:js:dev && npm run build:css:dev",
