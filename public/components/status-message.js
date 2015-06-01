@@ -1,7 +1,6 @@
 "use strict"
 
 import React from "react"
-import {branch} from "baobab-react/higher-order"
 
 
 export default class StatusMessage extends React.Component {
