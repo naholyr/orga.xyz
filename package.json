@@ -31,8 +31,18 @@
   },
   "aggregate-commands": {
     "watch": [
-      [ "js",      "npm", "run", "watch:js" ],
-      [ "server",  "npm", "run", "watch:server" ]
+      [
+        "js",
+        "npm",
+        "run",
+        "watch:js"
+      ],
+      [
+        "server",
+        "npm",
+        "run",
+        "watch:server"
+      ]
     ]
   },
   "author": "Nicolas Chambrier <naholyr@gmail.com>",
