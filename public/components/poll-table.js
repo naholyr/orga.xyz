@@ -5,21 +5,6 @@ import PollSwitch from "./poll-switch"
 
 
 export default class PollTable extends React.Component {
-  static propTypes = {
-    "scrollTop": React.PropTypes.number,
-    "scrollLeft": React.PropTypes.number,
-    "rowHeight": React.PropTypes.number,
-    "tableWidth": React.PropTypes.number,
-    "tableHeight": React.PropTypes.number,
-    "who": React.PropTypes.string.isRequired
-  }
-
-  static defaultProps = {
-    "rowHeight": 30,
-    "tableWidth": 1000,
-    "tableHeight": (typeof window !== "undefined") ? (window.innerHeight - 100) : 600
-  }
-
   renderHourHeaderCell(i) {
     const hour = this.props.hours[i]
 
@@ -79,4 +64,19 @@ export default class PollTable extends React.Component {
       </table>
     );
   }
+}
+
+PollTable.propTypes = {
+  "scrollTop": React.PropTypes.number,
+  "scrollLeft": React.PropTypes.number,
+  "rowHeight": React.PropTypes.number,
+  "tableWidth": React.PropTypes.number,
+  "tableHeight": React.PropTypes.number,
+  "who": React.PropTypes.string.isRequired
+}
+
+PollTable.defaultProps = {
+  "rowHeight": 30,
+  "tableWidth": 1000,
+  "tableHeight": (typeof window !== "undefined") ? (window.innerHeight - 100) : 600
 }

@@ -1,14 +1,14 @@
 "use strict"
 
-import React, {Component} from "react"
+import React from "react"
 import StatusMessage from "./status-message"
 import PollTable from "./poll-table"
 import PollReport from "./poll-report"
 
 
-export default class App extends Component {
+export default class App extends React.Component {
   onChangeWho(who) {
-    this.props.flux.getActions('poll').updateWho(who)
+    this.props.flux.getActions("poll").updateWho(who)
   }
 
   render() {

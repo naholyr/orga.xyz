@@ -1,15 +1,9 @@
 "use strict"
 
 import React from "react"
-import find from "lodash/collection/find"
 
 
 export default class PollSwitch extends React.Component {
-  static propTypes = {
-    "workshop": React.PropTypes.string.isRequired,
-    "hour": React.PropTypes.string.isRequired
-  }
-
   toggle(select) {
     const actions = this.props.flux.getActions("poll")
 
@@ -38,4 +32,9 @@ export default class PollSwitch extends React.Component {
       </button>
     )
   }
+}
+
+PollSwitch.propTypes = {
+  "workshop": React.PropTypes.string.isRequired,
+  "hour": React.PropTypes.string.isRequired
 }
