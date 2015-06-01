@@ -1,44 +1,41 @@
 "use strict"
 
 import React from "react"
+import find from "lodash/collection/find"
 
 
 export default class PollSwitch extends React.Component {
   static propTypes = {
-    "selected": React.PropTypes.bool,
-    "who": React.PropTypes.string.isRequired,
-    "onToggle": React.PropTypes.func
+    "workshop": React.PropTypes.string.isRequired,
+    "hour": React.PropTypes.string.isRequired
   }
 
-  static defaultProps = {
-    "selected": false,
-    "onToggle": () => {}
-  }
+  toggle(select) {
+    const actions = this.props.flux.getActions("poll")
 
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      "selected": props.selected
+    if (select) {
+      actions.select(this.props.workshop, this.props.hour, this.props.who)
+    } else {
+      actions.unselect(this.props.workshop, this.props.hour, this.props.who)
     }
   }
 
-  toggle() {
-    const selected = !this.state.selected
-
-    this.setState({ selected: selected })
-
-    this.props.onToggle(selected, this.props.who)
-  }
-
   render() {
-    const label = this.state.selected ? this.props.who : " "
+    const found = find(this.props.selections, {
+      "workshop": this.props.workshop,
+      "hour": this.props.hour
+    })
+    const who = found ? found.who : this.props.who // The one who checked this cell, or myself
+    const enabled = !found || this.props.who === found.who // Free cell or mine
+    const label = found && found.who
+    const selected = found && enabled
 
     return (
       <button
-        disabled={ !this.props.enabled }
-        title={ this.props.who }
-        onClick={ () => this.toggle() }
+        className={ selected ? "selected" : "" }
+        disabled={ !enabled }
+        title={ who }
+        onClick={ () => this.toggle(!selected) }
         >
         { label }
       </button>

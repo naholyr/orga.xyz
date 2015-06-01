@@ -2,6 +2,8 @@
 
 import React from "react"
 import App from "./components/app"
+import Flux from "./flux"
+import FluxComponent from "flummox/component"
 
 /*
 import Baobab from "baobab"
@@ -26,4 +28,10 @@ React.render(<RootedApp />, document.querySelector("#main"))
 window.app = tree
 */
 
-React.render(<App />, document.getElementById("main"))
+const flux = new Flux()
+
+React.render(
+  <FluxComponent flux={ flux } connectToStores={ ['poll'] }>
+    <App />
+  </FluxComponent>
+, document.getElementById("main"))

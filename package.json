@@ -5,9 +5,8 @@
   "main": "index.js",
   "dependencies": {
     "babel": "^5.4.7",
-    "baobab": "^1.1.0",
-    "baobab-react": "^0.1.1",
     "express": "^4.12.4",
+    "flummox": "^3.5.2",
     "lodash": "^3.9.3",
     "react": "^0.13.3",
     "react-router": "^0.13.3"

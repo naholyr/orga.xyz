@@ -2,8 +2,6 @@
 
 import React from "react"
 import PollSwitch from "./poll-switch"
-import {branch} from "baobab-react/higher-order"
-import {merge} from "lodash/object"
 
 
 export default class PollTable extends React.Component {
@@ -22,73 +20,39 @@ export default class PollTable extends React.Component {
     "tableHeight": (typeof window !== "undefined") ? (window.innerHeight - 100) : 600
   }
 
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      "workshops": {
-        "foot": "Football",
-        "maquillage": "Maquillage",
-        "peche-ligne": "Pêche à la ligne"
-      },
-      "hours": [
-        "10-11",
-        "11-12",
-        "14-15",
-        "15-16"
-      ],
-      "selects": {
-        "foot/10-11": "Bob Morane",
-        "foot/11-12": "John Doe",
-        "peche-ligne/10-11": "John Doe"
-      }
-    }
-  }
-
   renderHourHeaderCell(i) {
-    const hour = this.state.hours[i]
+    const hour = this.props.hours[i]
 
     return <th key={ "th:hour:" + hour }>{ hour }</th>
   }
 
   getWorkshopIndex(i) {
-    return Object.keys(this.state.workshops)[i]
+    return Object.keys(this.props.workshops)[i]
   }
 
   getWorkshopLabel(i) {
-    return this.state.workshops[this.getWorkshopIndex(i)]
+    return this.props.workshops[this.getWorkshopIndex(i)]
   }
 
   renderRow(i) {
     return (
       <tr key={ "tr:" + i }>
         <th>{ this.getWorkshopLabel(i) }</th>
-        { this.state.hours.map((h, j) => this.renderCell(i, j)) }
+        { this.props.hours.map((h, j) => this.renderCell(i, j)) }
       </tr>
     )
   }
 
-  onToggle(rowIndex, hourIndex, selected, who) {
-    const hour = this.state.hours[hourIndex]
-    const workshop = this.getWorkshopIndex(rowIndex)
-    const key = workshop + "/" + hour
-
-    this.setState({ selects: merge(this.state.selects, { [key]: selected ? who : null }) })
-  }
-
   renderCell(rowIndex, hourIndex) {
-    const hour = this.state.hours[hourIndex]
-    const workshop = this.getWorkshopIndex(rowIndex)
-    const key = workshop + "/" + hour
-    const affected = this.state.selects[key] || null
+    const hour = this.props.hours[hourIndex]
+    const workshop = Object.keys(this.props.workshops)[rowIndex]
 
     return (
-      <td key={ key } className={ affected && this.props.who === affected ? "highlight" : "" }>
+      <td key={ workshop + "/" + hour }>
         <PollSwitch
-          selected={ affected !== null }
-          who={ affected || this.props.who }
-          enabled={ !affected || this.props.who === affected }
-          onToggle={ (selected, who) => this.onToggle(rowIndex, hourIndex, selected, who) }
+          workshop={ workshop }
+          hour={ hour }
+          { ...this.props }
         />
       </td>
     )
@@ -96,21 +60,21 @@ export default class PollTable extends React.Component {
 
   render() {
     const controlledScrolling = this.props.left !== undefined || this.props.top !== undefined
-    const hours = this.state.hours
+    const hours = this.props.hours
 
     return (
       <table>
         <thead>
           <tr>
             <th rowSpan={ 2 }>Ateliers</th>
-            <th colSpan={ this.state.hours.length }>Tranches horaires</th>
+            <th colSpan={ this.props.hours.length }>Tranches horaires</th>
           </tr>
           <tr>
-            { this.state.hours.map((_, i) => this.renderHourHeaderCell(i)) }
+            { this.props.hours.map((_, i) => this.renderHourHeaderCell(i)) }
           </tr>
         </thead>
         <tbody>
-          { Object.keys(this.state.workshops).map((_, i) => this.renderRow(i)) }
+          { Object.keys(this.props.workshops).map((_, i) => this.renderRow(i)) }
         </tbody>
       </table>
     );

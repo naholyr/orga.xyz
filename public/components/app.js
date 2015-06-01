@@ -7,24 +7,16 @@ import PollReport from "./poll-report"
 
 
 export default class App extends Component {
-  static propTypes = {
-    "who": React.PropTypes.string
+  onChangeWho(who) {
+    this.props.flux.getActions('poll').updateWho(who)
   }
 
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      who: props.who || ""
-    }
-  }
-
-  render () {
+  render() {
     return (
       <div className="poll">
-        <input placeholder="Entrez votre nom" value={ this.state.who } onChange={ (e) => this.setState({ who: e.target.value }) } />
-        <PollTable who={ this.state.who } />
-        <PollReport who={ this.state.who } />
+        <input placeholder="Entrez votre nom" value={ this.props.who } onChange={ (e) => this.onChangeWho(e.target.value) } />
+        <PollTable { ...this.props } />
+        <PollReport { ...this.props } />
         <StatusMessage />
       </div>
     );
