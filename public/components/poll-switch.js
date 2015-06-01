@@ -21,10 +21,7 @@ export default class PollSwitch extends React.Component {
   }
 
   render() {
-    const found = find(this.props.selections, {
-      "workshop": this.props.workshop,
-      "hour": this.props.hour
-    })
+    const found = this.props.flux.getStore("poll").findSelection(this.props)
     const who = found ? found.who : this.props.who // The one who checked this cell, or myself
     const enabled = !found || this.props.who === found.who // Free cell or mine
     const label = found && found.who
