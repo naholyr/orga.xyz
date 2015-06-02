@@ -3,7 +3,6 @@
 import path from "path"
 import fsp from "fsp"
 import React from "react"
-import spread from "lodash/function/spread"
 import initComponent from "../public/init-component"
 import backend from "./backend"
 
@@ -13,10 +12,13 @@ export default function render (url, staticMarkup) {
     initComponent(backend),
     fsp.readFileP(path.join(__dirname, "..", "public", "index.html"), {"encoding": "utf8"})
   ])
-  .then(spread((component, page) => {
-    var html = staticMarkup ? React.renderToStaticMarkup(component) : React.renderToString(component)
-    return page.replace(/<!-- APP HERE -->/, html)
-  }))
+  .then(([component, page]) => {
+    const data = component.props.flux.getStore("poll").state
+    const html = staticMarkup ? React.renderToStaticMarkup(component) : React.renderToString(component)
+    return page
+      .replace(/<!-- APP HERE -->/, html)
+      .replace(/<!-- DATA HERE -->/, "window.POLL_DATA=" + JSON.stringify(data))
+  })
 }
 
 export function middleware (req, res) {

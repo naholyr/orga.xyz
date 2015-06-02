@@ -6,4 +6,4 @@ import backend from "./backend"
 
 const mount = document.getElementById("main")
 
-initComponent(backend).then(component => React.render(component, mount))
+initComponent(backend, window.POLL_DATA).then(component => React.render(component, mount))

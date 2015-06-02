@@ -6,10 +6,20 @@ import Flux from "./flux"
 import FluxComponent from "flummox/component"
 
 
-export default function initComponent (backend) {
+export default function initComponent (backend, initialData) {
   const flux = new Flux(backend)
 
-  return flux.getActions("poll").load().then(() => (
+  var dataReady
+  if (initialData) {
+    // Local cache
+    flux.getStore("poll").setState(initialData)
+    dataReady = Promise.resolve(initialData)
+  } else {
+    // Load from API
+    dataReady = flux.getActions("poll").load()
+  }
+
+  return dataReady.then(() => (
     <FluxComponent flux={ flux } connectToStores={ ["poll"] }>
       <App />
     </FluxComponent>
