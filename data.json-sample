@@ -8,8 +8,7 @@
     "ludik": "Jeux LudiK",
     "casse": "Casse-boites",
     "basket": "Basket",
-    "chateau": "Château gonflable",
-    "maquillage": "Maquillage"
+    "chateau": "Château gonflable"
   },
   "hours": [
     "14h30-15h",
@@ -17,7 +16,5 @@
     "15h30-16h",
     "16h-16h30",
     "16h30-17h"
-  ],
-  "selections": [
   ]
 }
