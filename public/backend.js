@@ -1,3 +1,4 @@
+import {} from "./promise-polyfill"
 import {} from "whatwg-fetch"
 
 
