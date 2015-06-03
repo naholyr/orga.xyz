@@ -1,19 +1,23 @@
 {
-  "who": "John Doe",
   "workshops": {
+    "peche-ligne": "Pêche à la ligne",
+    "peche-canards": "Pêche aux canards",
+    "quilles": "Jeux de quilles",
+    "oeuf": "Jeux de l'œuf",
     "foot": "Football",
-    "maquillage": "Maquillage",
-    "peche-ligne": "Pêche à la ligne"
+    "ludik": "Jeux LudiK",
+    "casse": "Casse-boites",
+    "basket": "Basket",
+    "chateau": "Château gonflable",
+    "maquillage": "Maquillage"
   },
   "hours": [
-    "10-11",
-    "11-12",
-    "14-15",
-    "15-16"
+    "14h30-15h",
+    "15h-15h30",
+    "15h30-16h",
+    "16h-16h30",
+    "16h30-17h"
   ],
   "selections": [
-    { "workshop": "foot", "hour": "10-11", "who": "Bob Morane" },
-    { "workshop": "foot", "hour": "11-12", "who": "John Doe" },
-    { "workshop": "peche-ligne", "hour": "10-11", "who": "John Doe" }
   ]
 }
