@@ -1,25 +1,23 @@
 "use strict"
 
 import path from "path"
-import fsp from "fsp"
+import {readFileSync} from "fs"
 import React from "react"
 import initComponent from "../shared/init-component"
 import backend from "./backend"
 
 
+const page = readFileSync(path.join(__dirname, "..", "public", "index.html"), {"encoding": "utf8"})
+
 export default function render (url, staticMarkup, who) {
   // Initialize component (calling global "load" action)
-  return Promise.all([
-    initComponent(backend),
-    fsp.readFileP(path.join(__dirname, "..", "public", "index.html"), {"encoding": "utf8"})
-  ])
+  return initComponent(backend)
   // Server-side we do not load "who" state from global "load" action
-  .then(([component, page]) => {
-    return component.props.flux.getActions("poll").updateWho(who)
-    .then(sess => [component, page])
+  .then(component => {
+    return component.props.flux.getActions("poll").updateWho(who).then(() => component)
   })
   // Generate final HTML
-  .then(([component, page]) => {
+  .then(component => {
     const data = component.props.flux.getStore("poll").state
     const html = staticMarkup ? React.renderToStaticMarkup(component) : React.renderToString(component)
     return page

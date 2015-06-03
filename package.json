@@ -42,7 +42,7 @@
     "build": "npm run build:js:prod && npm run build:css:prod",
     "watch:css": "npm run build:css:dev -- --watch",
     "watch:js": "watchify -t babelify public/main.js -o public/build.js -dv",
-    "watch:server": "nodemon -i public/build.js -e js,jsx server",
+    "watch:server": "nodemon -w . -w public/index.html -i 'public/*.js' -e js,jsx server",
     "watch": "aggregate-commands watch"
   },
   "aggregate-commands": {
