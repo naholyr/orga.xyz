@@ -6,7 +6,9 @@
   "dependencies": {
     "babel": "^5.4.7",
     "body-parser": "^1.12.4",
+    "connect-redis": "^2.3.0",
     "express": "^4.12.4",
+    "express-session": "^1.11.2",
     "flummox": "^3.5.2",
     "fsp": "^0.1.2",
     "lodash": "^3.9.3",

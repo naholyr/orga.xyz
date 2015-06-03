@@ -37,16 +37,16 @@ class Backend {
     })
   }
 
-  updateSession(sess) {
-    return load().then(data => {
-      data.who = sess.name
-      return write(data).then(() => sess)
-    })
+  updateSession(sess, req) {
+    if (req) {
+      req.session.name = sess.name
+    }
+    return Promise.resolve(sess)
   }
 
   middleware(method) {
     return (req, res) => {
-      method(req.body).then(result => res.send(result)).catch(err => res.status(500).send({"error": err.stack}))
+      method(req.body, req, res).then(result => res.send(result)).catch(err => res.status(500).send({"error": err.stack}))
     }
   }
 

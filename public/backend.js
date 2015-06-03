@@ -28,6 +28,7 @@ class Backend {
 
   updateSession(name) {
     return fetch("/session", {
+      "credentials": "include",
       "method": "PUT",
       "headers": {
         "content-type": "application/json"

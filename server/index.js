@@ -7,12 +7,24 @@ var express = require("express")
 var render = require("./render")
 var backend = require("./backend")
 var bodyParser = require("body-parser")
+var session = require("express-session")
+var RedisStore = require("connect-redis")(session)
 
 
 var app = module.exports = express()
 
 
 // React routes
+app.use(session({
+  "store": new RedisStore({
+    "host": "127.0.0.1",
+    "port": 6379,
+    "prefix": "kermesse:sess:"
+  }),
+  "secret": "KERMESSE",
+  "resave": true,
+  "saveUninitialized": false
+}))
 app.get("/", render.middleware)
 
 // Static server
