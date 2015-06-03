@@ -3,7 +3,7 @@
 import path from "path"
 import fsp from "fsp"
 import React from "react"
-import initComponent from "../public/init-component"
+import initComponent from "../shared/init-component"
 import backend from "./backend"
 
 

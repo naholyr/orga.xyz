@@ -1,7 +1,7 @@
 "use strict"
 
 import React from "react"
-import initComponent from "./init-component"
+import initComponent from "../shared/init-component"
 import backend from "./backend"
 
 const mount = document.getElementById("main")
