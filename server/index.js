@@ -9,6 +9,7 @@ var backend = require("./backend")
 var bodyParser = require("body-parser")
 var session = require("express-session")
 var RedisStore = require("connect-redis")(session)
+var config = require("./config.json")
 
 
 var app = module.exports = express()
@@ -16,11 +17,7 @@ var app = module.exports = express()
 
 // React routes
 app.use(session({
-  "store": new RedisStore({
-    "host": "127.0.0.1",
-    "port": 6379,
-    "prefix": "kermesse:sess:"
-  }),
+  "store": new RedisStore(config),
   "secret": "KERMESSE",
   "resave": true,
   "saveUninitialized": false

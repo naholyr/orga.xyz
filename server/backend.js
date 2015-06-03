@@ -1,40 +1,42 @@
 "use strict"
 
 import path from "path"
-import fsp from "fsp"
+import data from "../data.json"
 import without from "lodash/array/without"
 import find from "lodash/collection/find"
+import Redis from "ioredis"
+import config from "./config.json"
+import map from "lodash/collection/map"
 
 
-const DATA_FILE = path.join(__dirname, "..", "data.json")
+const client = new Redis(config)
 
-function load() {
-  return fsp.readFileP(DATA_FILE).then(JSON.parse)
+function buildSelection (who, field) {
+  // field = "workshop//hour"
+  const [workshop, hour] = field.split("//")
+  return {workshop, hour, who}
 }
 
-function write(data) {
-  return fsp.writeFileP(DATA_FILE, JSON.stringify(data, null, "  ")).then(() => data)
+function getSelections () {
+  return client.hgetall(config.selectionsKey)
+  .then(result => map(result, buildSelection))
 }
-
 
 class Backend {
 
   load() {
-    return load()
+    // grab selections and merge that with static data to forge global state
+    return getSelections().then(selections => ({...data, selections}))
   }
 
   addSelection(sel) {
-    return load().then(data => {
-      data.selections.push(sel)
-      return write(data).then(() => data.selections)
-    })
+    const field = sel.workshop + "//" + sel.hour
+    return client.hset(config.selectionsKey, field, sel.who).then(getSelections)
   }
 
   removeSelection(sel) {
-    return load().then(data => {
-      data.selections = without(data.selections, find(data.selections, sel))
-      return write(data).then(() => data.selections)
-    })
+    const field = sel.workshop + "//" + sel.hour
+    return client.hdel(config.selectionsKey, field).then(getSelections)
   }
 
   updateSession(sess, req) {

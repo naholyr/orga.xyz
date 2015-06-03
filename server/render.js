@@ -13,6 +13,8 @@ export default function render (url, staticMarkup, who) {
   // Initialize component (calling global "load" action)
   return initComponent(backend)
   // Server-side we do not load "who" state from global "load" action
+  // as it requires access to request, which is not possible the way we architectured our backend
+  // whatever, let's request "who" separately
   .then(component => {
     return component.props.flux.getActions("poll").updateWho(who).then(() => component)
   })

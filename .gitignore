@@ -28,3 +28,4 @@ node_modules
 public/build.js
 public/styles/build.css
 data.json
+server/config.json
