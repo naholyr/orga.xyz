@@ -9,11 +9,18 @@ export default class PollStore extends Store {
   constructor(flux) {
     super();
 
+    this.state = {
+      "showReport": false,
+      "showTable": true
+    }
+
     const pollActions = flux.getActions("poll")
     this.register(pollActions.select, this.onUpdateSelections)
     this.register(pollActions.unselect, this.onUpdateSelections)
     this.register(pollActions.updateWho, this.onUpdateWho)
     this.register(pollActions.load, this.onLoad)
+    this.register(pollActions.toggleTable, this.onToggleTable)
+    this.register(pollActions.toggleReport, this.onToggleReport)
   }
 
   findSelection(selection) {
@@ -37,5 +44,13 @@ export default class PollStore extends Store {
 
   onLoad(data) {
     this.setState(data)
+  }
+
+  onToggleReport(show) {
+    this.setState({"showReport": show})
+  }
+
+  onToggleTable(show) {
+    this.setState({"showTable": show})
   }
 }

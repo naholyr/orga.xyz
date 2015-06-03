@@ -6,6 +6,32 @@ body
   font-family Verdana
   font-size 16px
 
+nav
+  margin 1em 0 2em 0
+
+  span
+    display inline-block
+    font-weight bold
+    margin-right 1em
+  a
+    display inline-block
+    width 100px
+    background #d4ffaa
+    color darken(#d4ffaa, 50%)
+    padding 0.5em
+    text-align center
+    margin 5px
+    border-radius 5px
+    cursor pointer
+    &.active
+      color #fff
+      background-color #3f7f00
+      font-weight bold
+    &:before
+      content "✘ "
+    &.active:before
+      content "✔ "
+
 .poll
 
   input
@@ -34,8 +60,8 @@ body
         background-color darken(#d4ffaa, 10%)
 
       td button
-        min-width 100px
-        min-height 40px
+        width 120px
+        height 60px
         background transparent
       td button.selected
         outline 2px solid darken(#d4ffaa, 50%)

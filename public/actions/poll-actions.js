@@ -35,4 +35,12 @@ export default class PollActions extends Actions {
     return this.backend.updateSession(name).then(() => name)
   }
 
+  toggleTable(current) {
+    return !current
+  }
+
+  toggleReport(current) {
+    return !current
+  }
+
 }
