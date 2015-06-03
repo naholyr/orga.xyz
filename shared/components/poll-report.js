@@ -16,6 +16,11 @@ export default class PollReport extends React.Component {
 
   render() {
     const selections = sort(this.props.selections, ["workshop", "hour"])
+
+    if (!selections.length) {
+      return <p>Aucune sélection</p>
+    }
+
     return <ul>{ selections.map(s => this.renderSelection(s)) }</ul>
   }
 }

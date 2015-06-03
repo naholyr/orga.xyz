@@ -23,9 +23,9 @@ export default class App extends React.Component {
 
     return (
       <div className="poll">
-        <Nav { ...this.props } />
         { input }
         { table }
+        <Nav { ...this.props } />
         { report }
         <StatusMessage />
       </div>
