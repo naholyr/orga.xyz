@@ -1,4 +1,5 @@
-import data from "../data.json"
+import {} from "whatwg-fetch"
+
 
 class Backend {
 

@@ -14,6 +14,7 @@
     "lodash": "^3.9.3",
     "react": "^0.13.3",
     "react-router": "^0.13.3",
+    "whatwg-fetch": "^0.9.0",
     "yaku": "^0.1.9"
   },
   "devDependencies": {
