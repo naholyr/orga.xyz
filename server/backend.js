@@ -9,7 +9,7 @@ import config from "./config.json"
 import map from "lodash/collection/map"
 
 
-const client = new Redis(config)
+const client = new Redis(config.redis)
 
 function buildSelection (who, field) {
   // field = "workshop//hour"

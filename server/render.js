@@ -28,7 +28,7 @@ export default function render (url, staticMarkup, who) {
   })
 }
 
-export function middleware (req, res) {
+render.middleware = function middleware (req, res) {
   render(req.url, req.query.static, req.session.name)
   .then(html => res.status(200).send(html))
   .catch(err => res.status(500).send(err.stack))

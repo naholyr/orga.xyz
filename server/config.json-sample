@@ -1,6 +1,11 @@
 {
-  "host": "127.0.0.1",
-  "port": 6379,
-  "prefix": "kermesse:sess:",
-  "selectionsKey": "kermesse:selections"
+  "redis": {
+    "host": "127.0.0.1",
+    "port": 6379
+  },
+  "session": {
+    "prefix": "kermesse:sess:"
+  },
+  "selectionsKey": "kermesse:selections",
+  "port": 8000
 }
