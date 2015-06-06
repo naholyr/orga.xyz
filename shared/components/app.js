@@ -19,10 +19,12 @@ export default class App extends React.Component {
   }
 
   onChangeWho(e) {
-    // (*) Note this function is throttled because it's an onChange
-    // (*) so prop "who" will not always be updated, which could cause undecent latency
-    updateWho(this.props.flux, e.target.value)
-    // (*) So we rely on state
+    if (this.isValidWho(e.target.value)) {
+      // (*) Note this function is throttled because it's an onChange
+      // (*) so prop "who" will not always be updated, which could cause undecent latency
+      updateWho(this.props.flux, e.target.value)
+      // (*) So we rely on state
+    }
     this.setState({"who": e.target.value})
   }
 
@@ -34,7 +36,7 @@ export default class App extends React.Component {
     const isValidWho = this.state.who && this.isValidWho(String(this.state.who))
     const props = {...this.props, ...this.state, validWho: isValidWho}
     const input = this.props.showTable ? <input placeholder="Entrez votre nom" defaultValue={ this.state.who } onChange={ e => this.onChangeWho(e) } className={ isValidWho ? "" : "error" } /> : null
-    const inputError = !isValidWho ? <strong className="error">Nom invalide</strong> : null
+    const inputError = !isValidWho ? <strong className="error">Entrez un nom valide pour participer</strong> : null
     const table = this.props.showTable ? <PollTable { ...props } /> : null
     const report = this.props.showReport ? <PollReport { ...props } /> : null
 
