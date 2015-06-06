@@ -26,15 +26,21 @@ export default class App extends React.Component {
     this.setState({"who": e.target.value})
   }
 
+  isValidWho(who) {
+    return who.length > 3 && !who.match(/^\s+/) && !who.match(/\s+$/)
+  }
+
   render() {
+    const isValidWho = this.state.who && this.isValidWho(String(this.state.who))
     const props = {...this.props, ...this.state}
-    const input = this.props.showTable ? <input placeholder="Entrez votre nom" defaultValue={ this.state.who } onChange={ e => this.onChangeWho(e) } /> : null
+    const input = this.props.showTable ? <input placeholder="Entrez votre nom" defaultValue={ this.state.who } onChange={ e => this.onChangeWho(e) } className={ isValidWho ? "" : "error" } /> : null
+    const inputError = !isValidWho ? <strong className="error">Nom invalide</strong> : null
     const table = this.props.showTable ? <PollTable { ...props } /> : null
     const report = this.props.showReport ? <PollReport { ...props } /> : null
 
     return (
       <div className="poll">
-        { input }
+        { input } { inputError }
         { table }
         <Nav { ...props } />
         { report }
