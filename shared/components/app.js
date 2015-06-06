@@ -32,7 +32,7 @@ export default class App extends React.Component {
 
   render() {
     const isValidWho = this.state.who && this.isValidWho(String(this.state.who))
-    const props = {...this.props, ...this.state}
+    const props = {...this.props, ...this.state, validWho: isValidWho}
     const input = this.props.showTable ? <input placeholder="Entrez votre nom" defaultValue={ this.state.who } onChange={ e => this.onChangeWho(e) } className={ isValidWho ? "" : "error" } /> : null
     const inputError = !isValidWho ? <strong className="error">Nom invalide</strong> : null
     const table = this.props.showTable ? <PollTable { ...props } /> : null
