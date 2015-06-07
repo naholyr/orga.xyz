@@ -55,7 +55,7 @@ export default class PollStore extends Store {
   }
 
   isValidWho(who) {
-    return who.length > 3 && !who.match(/^\s+/) && !who.match(/\s+$/)
+    return who.length > 0 && !who.match(/^\s+/) && !who.match(/\s+$/)
   }
 
 }
