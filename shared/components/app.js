@@ -36,7 +36,7 @@ class App extends React.Component {
   }
 
   onChangeWho(e) {
-    if (this.isValidWho(e.target.value)) {
+    if (this.props.flux.getStore("poll").isValidWho(e.target.value)) {
       // (*) Note this function is throttled because it's an onChange
       // (*) so prop "who" will not always be updated, which could cause undecent latency
       updateWho(this.props.flux, e.target.value)
