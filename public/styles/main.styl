@@ -80,9 +80,17 @@ body
           width 180px
           height 60px
           background transparent
-        td button.selected
-          outline 2px solid darken(#d4ffaa, 50%)
-          font-weight bold
+          border none
+          outline none
+          cursor pointer
+          overflow-y auto
+          &[disabled]
+            cursor not-allowed
+          &.selected
+            outline 2px dashed darken(#d4ffaa, 60%)
+          div.name
+            &.myself
+              font-weight bold
 
         td, th
           padding 0

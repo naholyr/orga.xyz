@@ -2,6 +2,7 @@
 
 import React from "react"
 import Flux from "../flux"
+import contains from "lodash/collection/contains"
 import map from "lodash/collection/map"
 
 
@@ -27,16 +28,14 @@ export default class PollSwitch extends React.Component {
     const store = this.props.flux.getStore("poll")
     const validWho = store.isValidWho(this.props.who)
     const found = store.findSelection(this.props)
-    const who = found ? found.who : (validWho && this.props.who) // The one who checked this cell, or myself
-    const enabled = validWho && this.props.who && (!found || this.props.who === found.who) // Free cell or mine
-    const label = found && found.who
-    const selected = found && enabled
+    const label = found ? map(found.who, name => <div key={ name } className={ (name === this.props.who ? "myself " : "") + "name" }>{ name }</div>) : []
+    const selected = found && contains(found.who, this.props.who)
 
     return (
       <button
-        className={ selected ? "selected" : "" }
-        disabled={ !enabled }
-        title={ who }
+        className={ (selected ? "selected " : "") + " names-" + label.length }
+        disabled={ !validWho }
+        title={ found && found.who }
         onClick={ () => this.toggle(!selected) }
         >
         { label }

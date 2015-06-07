@@ -15,7 +15,7 @@ export default class PollTable extends React.Component {
     "selections": React.PropTypes.arrayOf(React.PropTypes.shape({
       "workshop": React.PropTypes.string.isRequired,
       "hour": React.PropTypes.string.isRequired,
-      "who": React.PropTypes.string.isRequired
+      "who": React.PropTypes.arrayOf(React.PropTypes.string).isRequired
     })).isRequired
   }
 
