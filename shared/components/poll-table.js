@@ -3,6 +3,7 @@
 import React from "react"
 import PollSwitch from "./poll-switch"
 import Flux from "../flux"
+import map from "lodash/collection/map"
 
 
 export default class PollTable extends React.Component {
@@ -36,7 +37,7 @@ export default class PollTable extends React.Component {
     return (
       <tr key={ "tr:" + i }>
         <th>{ this.getWorkshopLabel(i) }</th>
-        { this.props.hours.map((h, j) => this.renderCell(i, j)) }
+        { map(this.props.hours, (h, j) => this.renderCell(i, j)) }
       </tr>
     )
   }
@@ -66,11 +67,11 @@ export default class PollTable extends React.Component {
             <th colSpan={ this.props.hours.length }>Tranches horaires</th>
           </tr>
           <tr>
-            { this.props.hours.map((_, i) => this.renderHourHeaderCell(i)) }
+            { map(this.props.hours, (_, i) => this.renderHourHeaderCell(i)) }
           </tr>
         </thead>
         <tbody>
-          { Object.keys(this.props.workshops).map((_, i) => this.renderRow(i)) }
+          { map(Object.keys(this.props.workshops), (_, i) => this.renderRow(i)) }
         </tbody>
       </table>
     );

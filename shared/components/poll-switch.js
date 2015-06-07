@@ -2,6 +2,7 @@
 
 import React from "react"
 import Flux from "../flux"
+import map from "lodash/collection/map"
 
 
 export default class PollSwitch extends React.Component {

@@ -2,6 +2,7 @@
 
 import React from "react"
 import sort from "lodash/collection/sortByAll"
+import map from "lodash/collection/map"
 
 
 export default class PollReport extends React.Component {
@@ -30,6 +31,6 @@ export default class PollReport extends React.Component {
       return <p>Aucune sélection</p>
     }
 
-    return <ul>{ selections.map(s => this.renderSelection(s)) }</ul>
+    return <ul>{ map(selections, s => this.renderSelection(s)) }</ul>
   }
 }
