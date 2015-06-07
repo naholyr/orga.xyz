@@ -20,7 +20,7 @@ export default function initComponent (backend, initialData) {
   }
 
   return dataReady.then(() => (
-    <FluxComponent flux={ flux } connectToStores={ ["poll"] }>
+    <FluxComponent flux={ flux }>
       <App />
     </FluxComponent>
   ))

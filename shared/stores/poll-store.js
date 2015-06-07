@@ -53,4 +53,9 @@ export default class PollStore extends Store {
   onToggleTable(show) {
     this.setState({"showTable": show})
   }
+
+  isValidWho(who) {
+    return who.length > 3 && !who.match(/^\s+/) && !who.match(/\s+$/)
+  }
+
 }

@@ -5,6 +5,15 @@ import sort from "lodash/collection/sortByAll"
 
 
 export default class PollReport extends React.Component {
+  static propTypes = {
+    "workshops": React.PropTypes.objectOf(React.PropTypes.string).isRequired,
+    "selections": React.PropTypes.arrayOf(React.PropTypes.shape({
+      "workshop": React.PropTypes.string.isRequired,
+      "hour": React.PropTypes.string.isRequired,
+      "who": React.PropTypes.string.isRequired
+    })).isRequired
+  }
+
   renderSelection(selection) {
     const workshopLabel = this.props.workshops[selection.workshop]
     const hours = selection.hour.split("-")

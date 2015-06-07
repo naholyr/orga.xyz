@@ -2,9 +2,22 @@
 
 import React from "react"
 import PollSwitch from "./poll-switch"
+import Flux from "../flux"
 
 
 export default class PollTable extends React.Component {
+  static propTypes = {
+    "flux": React.PropTypes.instanceOf(Flux).isRequired,
+    "who": React.PropTypes.string.isRequired,
+    "hours": React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
+    "workshops": React.PropTypes.objectOf(React.PropTypes.string).isRequired,
+    "selections": React.PropTypes.arrayOf(React.PropTypes.shape({
+      "workshop": React.PropTypes.string.isRequired,
+      "hour": React.PropTypes.string.isRequired,
+      "who": React.PropTypes.string.isRequired
+    })).isRequired
+  }
+
   renderHourHeaderCell(i) {
     const hour = this.props.hours[i]
 
@@ -37,7 +50,8 @@ export default class PollTable extends React.Component {
         <PollSwitch
           workshop={ workshop }
           hour={ hour }
-          { ...this.props }
+          who={ this.props.who }
+          flux={ this.props.flux }
         />
       </td>
     )
@@ -61,19 +75,4 @@ export default class PollTable extends React.Component {
       </table>
     );
   }
-}
-
-PollTable.propTypes = {
-  "scrollTop": React.PropTypes.number,
-  "scrollLeft": React.PropTypes.number,
-  "rowHeight": React.PropTypes.number,
-  "tableWidth": React.PropTypes.number,
-  "tableHeight": React.PropTypes.number,
-  "who": React.PropTypes.string.isRequired
-}
-
-PollTable.defaultProps = {
-  "rowHeight": 30,
-  "tableWidth": 1000,
-  "tableHeight": (typeof window !== "undefined") ? (window.innerHeight - 100) : 600
 }
