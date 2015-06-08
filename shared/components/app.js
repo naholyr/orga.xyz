@@ -28,6 +28,10 @@ class App extends React.Component {
     "showReport": React.PropTypes.bool.isRequired
   }
 
+  static defaultProps = {
+    "who": ""
+  }
+
   constructor(props) {
     super(props)
 
