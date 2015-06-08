@@ -59,7 +59,7 @@ class App extends React.Component {
     const reportProps = tableProps
     const report = showReport ? <PollReport { ...reportProps } /> : null
 
-    const navProps = {showTable, showReport}
+    const navProps = {flux, showTable, showReport}
     const nav = <Nav { ...navProps } />
 
     return (
