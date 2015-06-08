@@ -25,7 +25,8 @@ class App extends React.Component {
       "who": React.PropTypes.arrayOf(React.PropTypes.string).isRequired
     })).isRequired,
     "showTable": React.PropTypes.bool.isRequired,
-    "showReport": React.PropTypes.bool.isRequired
+    "showReport": React.PropTypes.bool.isRequired,
+    "afterMount": React.PropTypes.func
   }
 
   static defaultProps = {
@@ -37,6 +38,10 @@ class App extends React.Component {
 
     // "who" is a state here for better reactivity (*)
     this.state = {"who": props.who}
+  }
+
+  componentDidMount() {
+    (this.props.afterMount || (()=>{}))()
   }
 
   onChangeWho(e) {

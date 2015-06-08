@@ -6,7 +6,7 @@ import Flux from "./flux"
 import FluxComponent from "flummox/component"
 
 
-export default function initComponent (backend, initialData) {
+export default function initComponent (backend, initialData, afterMount) {
   const flux = new Flux(backend)
 
   var dataReady
@@ -21,7 +21,7 @@ export default function initComponent (backend, initialData) {
 
   return dataReady.then(() => (
     <FluxComponent flux={ flux }>
-      <App />
+      <App afterMount={ afterMount }/>
     </FluxComponent>
   ))
 }
