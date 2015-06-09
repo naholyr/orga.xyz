@@ -11,6 +11,7 @@
     "express-session": "^1.11.2",
     "flummox": "^3.5.2",
     "fsp": "^0.1.2",
+    "hopscotch": "^0.2.4",
     "ioredis": "^1.4.0",
     "lodash": "^3.9.3",
     "react": "^0.13.3",

@@ -41,7 +41,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    (this.props.afterMount || (()=>{}))()
+    (this.props.afterMount || (()=>{}))(this.props)
   }
 
   onChangeWho(e) {

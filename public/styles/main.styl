@@ -1,4 +1,5 @@
 @import "nib"
+@import "./hopscotch.min.css"
 
 body
   global-reset()
@@ -6,15 +7,23 @@ body
   font-family Verdana
   font-size 16px
 
+  .show-tour
+    text-decoration none
+    color #0f0f00
+    font-weight bold
+  .hidden
+    display none
+
   h1
     font-size 2em
     color #3f7f00
     font-weight bold
-    text-align right
     margin-bottom 0.5em
+    float right
 
   p
     margin 0.5em 0
+    clear both
 
   strong
     font-weight bold
